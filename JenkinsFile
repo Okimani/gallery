@@ -2,7 +2,7 @@ pipeline {
   agent any
 
 tools{
-	nodejs 'NodeJS18'
+    nodejs 'NodeJS18'
   }
   
   stages { 
@@ -27,11 +27,12 @@ tools{
         sh 'npm test'
       }
     }
-	stage('Deploy Application') {
+    stage('Deploy Application') {
       steps {
             withCredentials([usernameColonPassword(credentialsId: 'heroku', variable: 'HEROKU_CREDENTIALS' )]){
                     sh 'git push https://${HEROKU_CREDENTIALS}@git.heroku.com/newgalleryapp.git master'
               }
     }
   }
+}
 }

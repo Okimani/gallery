@@ -29,7 +29,8 @@ tools{
     }
 	stage('Deploy Application') {
       steps {
-              sh 'echo "deploy an APP"'
+            withCredentials([usernameColonPassword(credentialsId: 'heroku', variable: 'HEROKU_CREDENTIALS' )]){
+                    sh 'git push https://${HEROKU_CREDENTIALS}@git.heroku.com/jenkinsgalleryapp.git master'
               }
     }
   }
